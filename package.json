@@ -1,0 +1,25 @@
+{
+  "name": "trabalhobiblioteca",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PedrinnhoUtumi/TrabalhoBiblioteca.git"
+  },
+  "author": "Pedro Utumi e Sara Guaiume",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PedrinnhoUtumi/TrabalhoBiblioteca/issues"
+  },
+  "homepage": "https://github.com/PedrinnhoUtumi/TrabalhoBiblioteca#readme",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "md5": "^2.3.0",
+    "pg": "^8.16.0"
+  }
+}
