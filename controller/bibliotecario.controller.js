@@ -1,7 +1,7 @@
 const bibliotecarioDAO = require("../model/bibliotecario.dao")
 const bibliotecarioRN = require("../model/bibliotecario.rn");
 
-exports.criarUsuario = async function(novoBilbiotecario){
+exports.criarBibliotecario = async function(novoBilbiotecario){
     const erros = [];
 
     const user = await bibliotecarioDAO.procurarBibliotecarioPeloUsuario(novoBilbiotecario.usuario);
@@ -22,6 +22,6 @@ exports.criarUsuario = async function(novoBilbiotecario){
         return erros;
     }
 
-    await bibliotecarioDAO.criarUsuario(novoBilbiotecario);
+    await bibliotecarioDAO.criarBibliotecario(novoBilbiotecario);
     return [];
 }
