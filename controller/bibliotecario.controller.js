@@ -2,7 +2,8 @@ const bibliotecarioDAO = require("../model/bibliotecario.dao")
 const bibliotecarioRN = require("../model/bibliotecario.rn");
 
 exports.criarBibliotecario = async function(novoBilbiotecario){
-    const erros = [];
+    try {
+        const erros = [];
 
     const user = await bibliotecarioDAO.procurarBibliotecarioPeloUsuario(novoBilbiotecario.usuario);
 
@@ -24,4 +25,9 @@ exports.criarBibliotecario = async function(novoBilbiotecario){
 
     await bibliotecarioDAO.criarBibliotecario(novoBilbiotecario);
     return [];
+    }
+    catch (erro) {
+        console.error("Erro ao criar bibliotecario", erro)
+        return "Não foi possível criar o bibliotecario!"
+    }
 }

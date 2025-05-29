@@ -17,10 +17,11 @@ exports.criarUsuario = async function(novoUsuario){
             await usuarioDAO.criarUsuario(novoUsuario)
         }
 
-
+        //verificações do RN
 
     }
-    catch (err) {
-
+    catch (erro) {
+        console.error("Erro ao criar usuário", erro)
+        return "Erro ao criar usuário"
     }
 }
