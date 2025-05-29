@@ -3,7 +3,8 @@ const bibliotecarioRN = require("./model/bibliotecario.rn");
 const bibliotecarioController = require("./controller/bibliotecario.controller");
 const bibliotecario = require("./entities/bibliotecario")
 const usuarioController = require("./controller/usuario.controller")
-//const usuarioDAO = require("")
+//const usuarioDAO = require("./model/usuario.dao")
+//const usuarioDAO = require("./model/usuario.rn")
 const cors = require("cors")
 
 const express = require('express')
