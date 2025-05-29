@@ -4,8 +4,8 @@ const bibliotecarioController = require("./controller/bibliotecario.controller")
 const bibliotecario = require("./entities/bibliotecario")
 const usuarioController = require("./controller/usuario.controller")
 const usuarioDAO = require("./model/usuario.dao")
-const usuarioDAO = require("./model/usuario.rn")
 const usuarioRN = require("./model/usuario.rn")
+
 
 const cors = require("cors")
 
@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
     res.send("Servidor ON")
 })
 
-app.get("/cadastrar", async function(req, res){
+app.post("/cadastrar", async function(req, res){
     // const novoBilbiotecario = new bibliotecario(req.body.nome, req.body.senha);
     // const resultado = usuarioController.criarBibliotecario(novoBilbiotecario);
 
@@ -70,7 +70,6 @@ app.post("/cadastrarUsuario", function(req, res){
   const novoUsuario = new usuario(req.body.RA, req.body.nome, req.body.profissao, req.body.curso, req.body.email. req.body.data_nasc)
   const resultado = usuarioController.criarUsuario(novoUsuario)
 })
-
 
 app.listen(port, () => {
     console.log("Servidor rodando na porta", port);
