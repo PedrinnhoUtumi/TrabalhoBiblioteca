@@ -1,3 +1,3 @@
 class Livro {
-    constructor(ISBN)
+    constructor(ISBN, categoria, editora, foto, titulo, )
 }

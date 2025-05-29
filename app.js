@@ -45,7 +45,7 @@ app.post("/cadastrar", async function (req, res) {
     //   VALUES ('${nome}', '${senha}')
     // `;
         const response = await db.query(
-            'INSERT INTO bibliotecario (name, senha) VALUES ($1, $2) RETURNING *',
+            'INSERT INTO bibliotecario (usuario, senha) VALUES ($1, $2) RETURNING *',
             [nome, senha]
         );
         res
