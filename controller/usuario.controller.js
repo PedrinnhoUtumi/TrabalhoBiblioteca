@@ -18,7 +18,6 @@ exports.criarUsuario = async function(novoUsuario){
         }
 
         //verificações do RN
-
     }
     catch (erro) {
         console.error("Erro ao criar usuário", erro)

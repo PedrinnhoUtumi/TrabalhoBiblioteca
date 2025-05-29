@@ -2,7 +2,8 @@ const bibliotecarioDAO = require("./model/bibliotecario.dao")
 const bibliotecarioRN = require("./model/bibliotecario.rn");
 const bibliotecarioController = require("./controller/bibliotecario.controller");
 const bibliotecario = require("./entities/bibliotecario")
-
+const usuarioController = require("./controller/usuario.controller")
+const cors = require("cors")
 
 const express = require('express')
 const app = express()
@@ -11,6 +12,11 @@ const port = 3000
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true 
+  }));
 
 app.get("/", (req, res) => {
     res.send("Servidor ON")
@@ -55,7 +61,7 @@ app.get("/cadastrarUsuario", function(req, res){
 
 app.post("/cadastrarUsuario", function(req, res){
   const novoUsuario = new usuario(req.body.RA, req.body.nome, req.body.profissao, req.body.curso, req.body.email. req.body.data_nasc)
-  const resultado = usuario
+  const resultado = usuarioController.criarUsuario(novoUsuario)
 })
 
 
