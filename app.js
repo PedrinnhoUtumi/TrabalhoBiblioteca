@@ -3,8 +3,9 @@ const bibliotecarioRN = require("./model/bibliotecario.rn");
 const bibliotecarioController = require("./controller/bibliotecario.controller");
 const bibliotecario = require("./entities/bibliotecario")
 const usuarioController = require("./controller/usuario.controller")
-//const usuarioDAO = require("./model/usuario.dao")
-//const usuarioDAO = require("./model/usuario.rn")
+const usuarioDAO = require("./model/usuario.dao")
+const usuarioDAO = require("./model/usuario.rn")
+const usuarioRN = require("./moidel")
 const cors = require("cors")
 
 const express = require('express')
@@ -17,8 +18,11 @@ app.use(bodyParser.json());
 
 app.use(cors({
     origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true 
   }));
+
+app.use(express.json())
 
 app.get("/", (req, res) => {
     res.send("Servidor ON")
