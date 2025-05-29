@@ -13,12 +13,14 @@ exports.criarUsuario = async function(novoUsuario){
 
         if (erros.length > 0) {
             return erros
+        } else {
+            await usuarioDAO.criarUsuario(novoUsuario)
         }
 
 
 
     }
-    catch {
+    catch (err) {
 
     }
 }

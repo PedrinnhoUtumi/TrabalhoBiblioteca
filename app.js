@@ -1,6 +1,6 @@
 const bibliotecarioDAO = require("./model/bibliotecario.dao")
 const bibliotecarioRN = require("./model/bibliotecario.rn");
-const bibliotecarioController = require("./Controller/bibliotecario.controller");
+const bibliotecarioController = require("./controller/bibliotecario.controller");
 const bibliotecario = require("./entities/bibliotecario")
 
 
