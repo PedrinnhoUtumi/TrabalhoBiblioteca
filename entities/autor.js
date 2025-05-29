@@ -1,7 +1,7 @@
 class Autor {
     constructor(nome) {
-        this.idCat = idCat
+        this.nome = nome
     }
 }
 
-module.exports = SubCategorias;
+module.exports = Autor;

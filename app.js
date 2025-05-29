@@ -34,11 +34,8 @@ app.get("/", (req, res) => {
 app.post("/cadastrar", async function (req, res) {
     // const novoBilbiotecario = new bibliotecario(req.body.nome, req.body.senha);
     // const resultado = usuarioController.criarBibliotecario(novoBilbiotecario);
-
-
-    // resultado.then(resp => {resp ? res.redirect('/listarUsuarios') : res.render('cadastroUsuario', {usuario: novoBilbiotecario, mensagem: "erro: Username deve ter 8 caracteres!"} )})
+   // resultado.then(resp => {resp ? res.redirect('/listarUsuarios') : res.render('cadastroUsuario', {usuario: novoBilbiotecario, mensagem: "erro: Username deve ter 8 caracteres!"} )})
     const { nome, senha } = req.body;
-
     try {
     //     const query = `
     //   INSERT INTO bibliotecario (NAME, SENHA)
@@ -48,9 +45,7 @@ app.post("/cadastrar", async function (req, res) {
             'INSERT INTO bibliotecario (usuario, senha) VALUES ($1, $2) RETURNING *',
             [nome, senha]
         );
-        res
-            .status(201)
-            .json({ message: "Usuário criado com sucesso", response: response.data });
+        res.status(201).json({ message: "Usuário criado com sucesso", response: response.data });
     } catch (error) {
         console.error("Erro ao criar Bibliotecario:", error.message);
         res.status(500).json({ error: "Erro ao criar Bibliotecario" });
