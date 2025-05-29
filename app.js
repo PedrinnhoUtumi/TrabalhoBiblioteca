@@ -14,14 +14,16 @@ const app = express()
 const bodyParser = require("body-parser")
 const port = 3000
 
+const db = require('./config/database')
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(cors({
     origin: 'http://localhost:5173',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true 
-  }));
+    credentials: true
+}));
 
 app.use(express.json())
 
@@ -29,49 +31,43 @@ app.get("/", (req, res) => {
     res.send("Servidor ON")
 })
 
-app.post("/cadastrar", async function(req, res){
+app.post("/cadastrar", async function (req, res) {
     // const novoBilbiotecario = new bibliotecario(req.body.nome, req.body.senha);
     // const resultado = usuarioController.criarBibliotecario(novoBilbiotecario);
 
-    
+
     // resultado.then(resp => {resp ? res.redirect('/listarUsuarios') : res.render('cadastroUsuario', {usuario: novoBilbiotecario, mensagem: "erro: Username deve ter 8 caracteres!"} )})
     const { nome, senha } = req.body;
 
     try {
-      const query = `
-      INSERT INTO bibliotecario (NAME, SENHA)
-      VALUES ('${nome}', '${senha}')
-    `;
-      const response = await axios.post(
-        url,
-        { q: query },
-        {
-          auth: {
-            username: "postgres",
-            password: "postgres",
-          },
-        }
-      );
-      res
-        .status(201)
-        .json({ message: "Usuário criado com sucesso", response: response.data });
+    //     const query = `
+    //   INSERT INTO bibliotecario (NAME, SENHA)
+    //   VALUES ('${nome}', '${senha}')
+    // `;
+        const response = await db.query(
+            'INSERT INTO bibliotecario (name, senha) VALUES ($1, $2) RETURNING *',
+            [nome, senha]
+        );
+        res
+            .status(201)
+            .json({ message: "Usuário criado com sucesso", response: response.data });
     } catch (error) {
-      console.error("Erro ao buscar myuser:", error.message);
-      res.status(500).json({ error: "Erro ao buscar myuser" });
+        console.error("Erro ao buscar myuser:", error.message);
+        res.status(500).json({ error: "Erro ao buscar myuser" });
     }
-    
+
 })
 
-app.get("/cadastrarUsuario", function(req, res){
-  res.render("/cadastrar")
+app.get("/cadastrarUsuario", function (req, res) {
+    res.render("/cadastrar")
 })
 
-app.post("/cadastrarUsuario", function(req, res){
-  const novoUsuario = new usuario(req.body.RA, req.body.nome, req.body.profissao, req.body.curso, req.body.email. req.body.data_nasc)
-  const resultado = usuarioController.criarUsuario(novoUsuario)
+app.post("/cadastrarUsuario", function (req, res) {
+    const novoUsuario = new usuario(req.body.RA, req.body.nome, req.body.profissao, req.body.curso, req.body.email.req.body.data_nasc)
+    const resultado = usuarioController.criarUsuario(novoUsuario)
 })
 
 app.listen(port, () => {
     console.log("Servidor rodando na porta", port);
-    
+
 })

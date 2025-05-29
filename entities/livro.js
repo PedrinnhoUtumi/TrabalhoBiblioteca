@@ -1,0 +1,3 @@
+class Livro {
+    constructor(ISBN)
+}
