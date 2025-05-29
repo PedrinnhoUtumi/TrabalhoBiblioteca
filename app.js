@@ -26,7 +26,7 @@ app.get("/cadastrar", async function(req, res){
 
     try {
       const query = `
-      INSERT INTO bibliotecario (ID, NAME, EMAIL, SENHA, ROLE, ACCOUNT)
+      INSERT INTO bibliotecario (NAME, SENHA)
       VALUES ('${nome}', '${senha}')
     `;
       const response = await axios.post(
