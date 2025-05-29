@@ -1,8 +1,6 @@
 const db = require("../config/database")
 const md5 = require("md5")
 
-
-
 exports.criarBibliotecario = async function(novoBilbiotecario){
     const resposta = await db.query(
         'INSERT INTO bibliotecario (usuario, senha) VALUES ($1, $2)',
@@ -12,9 +10,9 @@ exports.criarBibliotecario = async function(novoBilbiotecario){
     return "Bibliotecario cadastrado com sucesso!";
 }
 
-exports.procurarBibliotecarioPeloUsuario = async function(usuario){
+exports.procurarBibliotecarioPeloUsuario = async function(id){
     const {rows} = await db.query(
-        `SELECT * FROM bibliotecario WHERE usuario = '${usuario}'`
+        `SELECT * FROM bibliotecario WHERE idbibli = '${id}'`
     );
     
     return rows;
