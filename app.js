@@ -6,7 +6,7 @@ const usuarioController = require("./controller/usuario.controller")
 const usuarioDAO = require("./model/usuario.dao")
 const usuarioRN = require("./model/usuario.rn")
 
-
+const axios = require("axios")
 const cors = require("cors")
 
 const express = require('express')
