@@ -49,6 +49,13 @@ app.get("/cadastrar", async function(req, res){
     
 })
 
+app.get("/cadastrar", function(req, res){
+  res.render("/cadastrar")
+})
+
+app.post("/cadastrar", function(req, res){
+  const novoUsuario = new usuario(req.body.RA, req.body.nome, req.body.profissao, req.body.curso, req.body.email. req.body.)
+})
 
 
 app.listen(port, () => {
