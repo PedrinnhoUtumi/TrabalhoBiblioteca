@@ -52,8 +52,8 @@ app.post("/cadastrar", async function (req, res) {
             .status(201)
             .json({ message: "Usuário criado com sucesso", response: response.data });
     } catch (error) {
-        console.error("Erro ao buscar myuser:", error.message);
-        res.status(500).json({ error: "Erro ao buscar myuser" });
+        console.error("Erro ao criar Bibliotecario:", error.message);
+        res.status(500).json({ error: "Erro ao criar Bibliotecario" });
     }
 
 })

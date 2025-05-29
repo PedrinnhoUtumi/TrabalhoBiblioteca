@@ -1,6 +1,6 @@
 class SubCategorias {
-    constructor(idcat) {
-        this.idcat = idcat
+    constructor(idCat) {
+        this.idCat = idCat
     }
 }
 
