@@ -1,7 +1,7 @@
-class SubCategorias {
-    constructor(idCat) {
-        this.idCat = idCat
+class SubCategoria {
+    constructor(idCategoria) {
+        this.idCategoria = idCategoria
     }
 }
 
-module.exports = SubCategorias;
+module.exports = SubCategoria;

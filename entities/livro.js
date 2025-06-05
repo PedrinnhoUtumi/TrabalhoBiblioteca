@@ -1,12 +1,13 @@
 class Livro {
-    constructor(ISBN, categoria, editora, foto, titulo, autor, edicao, resumo ){
-        this.ISBN = ISBN;   
-        this.categoria = categoria;
-        this.editora = editora;
-        this.foto = foto;
+    constructor(isbn, titulo, idCategoria, idAutor, editora, edicao, qtdEstoque, foto, resumo ){
+        this.isbn = isbn;   
         this.titulo = titulo;
-        this.autor = autor;
+        this.idCategoria = idCategoria;
+        this.idAutor = idAutor;
+        this.editora = editora;
         this.edicao = edicao;
+        this.qtdEstoque = qtdEstoque
+        this.foto = foto;
         this.resumo = resumo;
     }
 }

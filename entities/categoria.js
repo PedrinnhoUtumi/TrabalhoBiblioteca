@@ -1,7 +1,7 @@
-class Categorias {
-    constructor(nome) {
-        this.nome = nome
+class Categoria {
+    constructor(nomeCategoria) {
+        this.nomeCategoria = nomeCategoria
     }
 }
 
-module.exports = Categorias;
+module.exports = Categoria;

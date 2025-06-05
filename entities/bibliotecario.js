@@ -1,6 +1,6 @@
 class Bibliotecario {
-    constructor(usuario, senha) {
-        this.usuario = usuario;
+    constructor(nomeBibliotecario, senha) {
+        this.nomeBibliotecario = nomeBibliotecario;
         this.senha = senha;
     }
 }

@@ -1,10 +1,10 @@
-const db = require("../config/database")
+const db = require("../../config/database")
 const md5 = require("md5")
 
 exports.criarCurso = async function(novoCurso){
     const resposta = await db.query(
-        'INSERT INTO Usuario (codigo, nome) VALUES ($1, $2)',
-        [novoCurso.codigo, novoCurso.nome]
+        'INSERT INTO Usuario (codigo, nomeCurso) VALUES ($1, $2)',
+        [novoCurso.codigo, novoCurso.nomeCurso]
     );
     
     return "Curso cadastrado com sucesso!";
