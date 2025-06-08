@@ -16,7 +16,7 @@ const app = express()
 const bodyParser = require("body-parser")
 const port = 3000
 
-// const db = require('./config/database')
+const db = require('./config/database')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -33,19 +33,30 @@ app.get("/", (req, res) => {
     res.send("Servidor ON")
 })
 
+// app.get("/teste", (req, res) => {
+//     (async () => {
+//         try {
+//             const res = await db.query('SELECT NOW()');
+//             console.log('✅ Conectado com sucesso! Hora atual do banco:', res.rows[0].now);
+//         } catch (err) {
+//             console.error('❌ Erro ao conectar com o banco:', err);
+//         }
+//     })();
+// })
+
 app.post("/cadastrar", async (req, res) => {
     const { nome, senha } = req.body;
     const novoBibliotecario = new bibliotecario(nome, senha)
     try {
         const resposta = await bibliotecarioController.criarBibliotecario(novoBibliotecario)
         console.log(resposta);
-        
+
         res.status(201).json({ message: resposta });
 
     } catch (error) {
         console.error("Erro ao criar Bibliotecario:", error.message);
         res.status(500).json({ error: "Erro ao criar Bibliotecario" });
-    }novoBibliotecario
+    } novoBibliotecario
 
 })
 
@@ -55,7 +66,7 @@ app.post("/cadastrarAutor", async (req, res) => {
     try {
         const resposta = await autorController.criarAutor(novoAutor)
         console.log(resposta);
-        
+
         res.status(201).json({ message: resposta });
 
     } catch (error) {
@@ -65,13 +76,13 @@ app.post("/cadastrarAutor", async (req, res) => {
 
 })
 
-app.post("/cadastrarCliente", async function(req, res){
-    const {nomeCliente, RA, idProfissao, telefone, dataNasc, email, codigoCurso} = req.body
+app.post("/cadastroUsuario", async function (req, res) {
+    const { nomeCliente, RA, idProfissao, telefone, dataNasc, email, codigoCurso } = req.body
     const novoCliente = new cliente(nomeCliente, RA, idProfissao, telefone, dataNasc, email, codigoCurso)
     try {
         const resposta = await clienteController.criar(novoCliente)
         console.log(resposta);
-        
+
         res.status(201).json({ message: resposta });
 
     } catch (error) {

@@ -3,9 +3,9 @@ const bibliotecarioRN = require("../model/rn/bibliotecario.rn");
 
 exports.criarBibliotecario = async function(novoBilbiotecario){
     try {
-        if (bibliotecarioRN.validarSenha(novoBilbiotecario.senha)) {
+        // if (bibliotecarioRN.validarSenha(novoBilbiotecario.senha)) {
             return await bibliotecarioDAO.criarBibliotecario(novoBilbiotecario);
-        }
+        // }
     }
     catch (erro) {
         console.error("Erro ao criar bibliotecario", erro)
