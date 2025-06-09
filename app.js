@@ -4,6 +4,9 @@ const bibliotecario = require("./entities/bibliotecario")
 
 const autorController = require("./controller/autor.controller")
 const autor = require("./entities/autor")
+
+const clienteController = require("./controller/cliente.controller")
+const cliente = require("./entities/cliente")
 // const usuarioController = require("./controller/usuario.controller")
 // const usuarioDAO = require("./model/usuario.dao")
 // const usuarioRN = require("./model/usuario.rn")
@@ -80,7 +83,7 @@ app.post("/cadastroUsuario", async function (req, res) {
     const { nomeCliente, RA, idProfissao, telefone, dataNasc, email, codigoCurso } = req.body
     const novoCliente = new cliente(nomeCliente, RA, idProfissao, telefone, dataNasc, email, codigoCurso)
     try {
-        const resposta = await clienteController.criar(novoCliente)
+        const resposta = await clienteController.criarUsuario(novoCliente)
         console.log(resposta);
 
         res.status(201).json({ message: resposta });

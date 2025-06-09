@@ -9,25 +9,19 @@ exports.criarAutor = async function(novoAutor){
     return "Autor cadastrado com sucesso!";
 };
 
-exports.listarProdutos = async function(){
+exports.listarAutor = async function(){
     const {rows} = await db.query("SELECT * FROM autor");
     return rows;
 };
 
 
-exports.consultarAutor = async function(idAutor, nomeAutor) {
-    if(idAutor !== null) {
-        const {rows} = await db.query (
-            `SELECT * FROM autor WHERE idAutor = ${idAutor}`
-        );
-        return rows
-    } else {
-        const {rows} = await db.query (
-            `SELECT * FROM autor WHERE nomeAutor = ${nomeAutor}`
-        );
-        return rows
-    }
-}
+exports.consultarAutor = async function(nomeAutor) {
+    const {rows} = await db.query (
+        `SELECT * FROM autor WHERE nomeAutor = ${nomeAutor}`
+    );
+    return rows
+};
+
 
 exports.removerAutor = async function(idAutor, nomeAutor) {
     if(idAutor !== null) {
