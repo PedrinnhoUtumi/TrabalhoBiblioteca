@@ -11,3 +11,21 @@ exports.criarUsuario = async function(novoUsuario){
         return "Erro ao criar usuário"
     }
 }
+
+exports.listarUsuarios = async () => {
+    try {
+        return await clienteDAO.listarUsuario()
+    } catch (error) {
+        console.error("Erro ao listar usuário", error)
+        return "Erro ao listar usuário"
+    }
+}
+
+exports.removerUsuario = async (idUsuario) => {
+    try {
+        return await clienteDAO.removerUsuario(idUsuario)
+    } catch (error) {
+        console.error("Erro ao listar usuário", error)
+        return "Erro ao listar usuário"
+    }
+}

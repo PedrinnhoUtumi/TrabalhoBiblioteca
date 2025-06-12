@@ -29,23 +29,18 @@ exports.procurarUsuario = async function(RA, nome, dataNasc){
     }
 };
 
-exports.listarUusario = async function(){
+exports.listarUsuario = async function(){
     const {rows} = await db.query("SELECT * FROM cliente");
+    
     return rows;
 };
 
-exports.removerUsuario = async function(idUsuario, nomeUsuario) {
-    if(idUsuario !== null) {
-        const resposta = await db.query (
-            `DELETE FROM Usuario WHERE idUsuario = ${idUsuario}`
-        );
-        return true
-    } else {
-        const resposta = await db.query (
-            `DELETE FROM Usuario WHERE nomeUsuario = ${nomeUsuario}`
-        );
-        return true
-    }
+exports.removerUsuario = async function(idUsuario) {
+    const resposta = await db.query (
+        `DELETE FROM Cliente WHERE idcliente = ${idUsuario}`
+    );
+    return true
+
 };
 
 exports.atualizarUsuario = async function(nomeUsuario) {
