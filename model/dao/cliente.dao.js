@@ -43,9 +43,9 @@ exports.removerUsuario = async function(idUsuario) {
 
 };
 
-exports.atualizarUsuario = async function(nomeUsuario) {
+exports.atualizarUsuario = async function(novoCliente) {
     const resposta = await db.query (
-        `UPDATE Usuario SET nomeUsuario = ${nomeUsuario}`
+        `UPDATE cliente SET nomecliente = '${novoCliente.nomeCliente}', ra = '${novoCliente.RA}', idprofissao = ${novoCliente.idProfissao}, telefone = '${novoCliente.telefone}', datanasc = '${novoCliente.dataNasc}', email = '${novoCliente.email}', codigocurso = '${novoCliente.codigoCurso}' WHERE nomecliente = ${novoCliente.nomeCliente}`
     )
     return true
 };

@@ -61,15 +61,29 @@ app.get("/api/usuario", async (req, res) => {
 })
 
 app.delete("/api/usuario/:id", async (req, res) => {
-    const idUsuario = req.params.id
+    const novoUsuario = req.params.id
     try {
-        const resposta = await clienteController.removerUsuario(idUsuario)
+        const resposta = await clienteController.removerUsuario(novoUsuario)
         res.status(200).json({message: resposta})
     } catch (error) {
         console.error("Erro ao listar usuario:", error.message);
         res.status(500).json({ error: "Erro ao listar usuario" });
     }
 })
+
+app.put("/api/usuario", async (req, res) => {
+    const { dados } = req.body
+    const novoCliente = new cliente(dados.nomeCliente, dados.RA, dados.idProfissao, dados.telefone, dados.dataNasc, dados.email, dados.codigoCurso)
+    try {
+        const resposta = await clienteController.atualizarUsuario(novoCliente)
+        res.status(200).json({message: resposta})
+    } catch (error) {
+        console.error("Erro ao atualizar usuario:", error.message);
+        res.status(500).json({ error: "Erro ao atualizar usuario" });
+    }
+})
+
+
 
 app.post("/cadastrar", async (req, res) => {
     const { nome, senha } = req.body;

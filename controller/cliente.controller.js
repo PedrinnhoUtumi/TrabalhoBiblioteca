@@ -29,3 +29,12 @@ exports.removerUsuario = async (idUsuario) => {
         return "Erro ao listar usuário"
     }
 }
+
+exports.atualizarUsuario = async (novoCliente) => {
+    try {
+        return await clienteDAO.atualizarUsuario(novoCliente)
+    } catch (error) {
+        console.error("Erro atualizar", error)
+        return "Erro ao atualizar"
+    }
+}
