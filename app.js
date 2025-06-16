@@ -28,9 +28,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(cors({
-    // origin: 'http://localhost:5173',
-    // methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    // credentials: true
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
 }));
 
 app.use(express.json())
@@ -61,9 +61,9 @@ app.get("/api/usuario", async (req, res) => {
 })
 
 app.delete("/api/usuario/:id", async (req, res) => {
-    const novoUsuario = req.params.id
+    const usuarioDeletado = req.params.id
     try {
-        const resposta = await clienteController.removerUsuario(novoUsuario)
+        const resposta = await clienteController.removerUsuario(usuarioDeletado)
         res.status(200).json({message: resposta})
     } catch (error) {
         console.error("Erro ao listar usuario:", error.message);
