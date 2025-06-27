@@ -1,26 +1,40 @@
 const clienteDAO = require("../model/dao/cliente.dao")
-const usuarioRN = require("../model/usuario.rn");
+// const usuarioRN = require("../model/usuario.rn");
 
 exports.criarUsuario = async function(novoUsuario){
-    const erros = [];
-
     try {
-        const cliente = await clienteDAO.procurarUsuario(novoUsuario.RA)
+        return await clienteDAO.criarUsuario(novoUsuario)
 
-        if (cliente.length != 0) {
-            erros.push("Usuário já existe!")
-        }
-
-        if (erros.length > 0) {
-            return erros
-        } else {
-            return await clienteDAO.criarUsuario(novoUsuario)
-        }
-
-        //verificações do RN
     }
     catch (erro) {
         console.error("Erro ao criar usuário", erro)
         return "Erro ao criar usuário"
+    }
+}
+
+exports.listarUsuarios = async () => {
+    try {
+        return await clienteDAO.listarUsuario()
+    } catch (error) {
+        console.error("Erro ao listar usuário", error)
+        return "Erro ao listar usuário"
+    }
+}
+
+exports.removerUsuario = async (idUsuario) => {
+    try {
+        return await clienteDAO.removerUsuario(idUsuario)
+    } catch (error) {
+        console.error("Erro ao listar usuário", error)
+        return "Erro ao listar usuário"
+    }
+}
+
+exports.atualizarUsuario = async (novoCliente) => {
+    try {
+        return await clienteDAO.atualizarUsuario(novoCliente)
+    } catch (error) {
+        console.error("Erro atualizar", error)
+        return "Erro ao atualizar"
     }
 }

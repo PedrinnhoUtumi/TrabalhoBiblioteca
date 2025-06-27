@@ -1,12 +1,12 @@
 class Cliente {
-    constructor(nomeCliente, RA, idProfissao, telefone, data_nasc, email, curso) {
+    constructor(nomeCliente, RA, idProfissao, telefone, dataNasc, email, codigoCurso) {
         this.nomeCliente = nomeCliente;
         this.RA = RA;
         this.idProfissao = idProfissao;
         this.telefone = telefone;
-        this.data_nasc = data_nasc;
+        this.dataNasc = dataNasc;
         this.email = email;
-        this.curso = curso;
+        this.codigoCurso = codigoCurso;
     }
 }
 

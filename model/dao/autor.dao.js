@@ -15,19 +15,13 @@ exports.listarAutor = async function(){
 };
 
 
-exports.consultarAutor = async function(idAutor, nomeAutor) {
-    if(idAutor !== null) {
-        const {rows} = await db.query (
-            `SELECT * FROM autor WHERE idAutor = ${idAutor}`
-        );
-        return rows
-    } else {
-        const {rows} = await db.query (
-            `SELECT * FROM autor WHERE nomeAutor = ${nomeAutor}`
-        );
-        return rows
-    }
-}
+exports.consultarAutor = async function(nomeAutor) {
+    const {rows} = await db.query (
+        `SELECT * FROM autor WHERE nomeAutor = ${nomeAutor}`
+    );
+    return rows
+};
+
 
 exports.removerAutor = async function(idAutor, nomeAutor) {
     if(idAutor !== null) {
