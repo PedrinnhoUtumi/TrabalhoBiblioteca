@@ -4,6 +4,9 @@ const bibliotecario = require("./entities/bibliotecario")
 
 const autorController = require("./controller/autor.controller")
 const autor = require("./entities/autor")
+
+const livroController = require("./controller/livro.controller")
+const livro = require("./entities/livro")
 // const usuarioController = require("./controller/usuario.controller")
 // const usuarioDAO = require("./model/usuario.dao")
 // const usuarioRN = require("./model/usuario.rn")
@@ -65,7 +68,7 @@ app.post("/cadastrarAutor", async (req, res) => {
 
 })
 
-app.post("/cadastrarCliente", async function(req, res){
+app.post("/cadastrarCliente", async (req, res) => {
     const {nomeCliente, RA, idProfissao, telefone, dataNasc, email, codigoCurso} = req.body
     const novoCliente = new cliente(nomeCliente, RA, idProfissao, telefone, dataNasc, email, codigoCurso)
     try {
@@ -80,7 +83,20 @@ app.post("/cadastrarCliente", async function(req, res){
     }
 })
 
+app.post("/cadastrarLivro", async (req, res) => {
+    const { isbn, titulo, idCategoria, idAutor, editora, edicao, qntEstoque, resumo } = req.body;
+    const novoLivro = new livro(isbn, titulo, idCategoria, idAutor, editora, edicao, qntEstoque, resumo)
+    try {
+        const resposta = await autorController.criarAutor(novoAutor)
+        console.log(resposta);
+        
+        res.status(201).json({ message: resposta });
 
+    } catch (error) {
+        console.error("Erro ao criar Bibliotecario:", error.message);
+        res.status(500).json({ error: "Erro ao criar Bibliotecario" });
+    }
+})
 
 app.listen(port, () => {
     console.log("Servidor rodando na porta", port);

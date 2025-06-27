@@ -9,7 +9,7 @@ exports.criarAutor = async function(novoAutor){
     return "Autor cadastrado com sucesso!";
 };
 
-exports.listarProdutos = async function(){
+exports.listarAutor = async function(){
     const {rows} = await db.query("SELECT * FROM autor");
     return rows;
 };
