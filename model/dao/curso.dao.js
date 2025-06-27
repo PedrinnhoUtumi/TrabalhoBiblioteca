@@ -3,7 +3,7 @@ const md5 = require("md5")
 
 exports.criarCurso = async function(novoCurso){
     const resposta = await db.query(
-        'INSERT INTO Usuario (codigo, nomeCurso) VALUES ($1, $2)',
+        'INSERT INTO curso (codigo, nomeCurso) VALUES ($1, $2)',
         [novoCurso.codigo, novoCurso.nomeCurso]
     );
     
