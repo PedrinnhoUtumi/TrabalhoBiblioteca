@@ -1,9 +1,11 @@
 const db = require("../../config/database")
 
+// const extensao_arquivo = novo_produto.foto.nome.split(".").pop();
+
 exports.criarLivro = async function(novoLivro, categoria, autor){
     const response = await db.query(
-        'INSERT INTO livro (isbn, titulo, idCategoria, idAutor, editora, edicao, qtdEstoque, resumo) VALUES ($1) RETURNING *',
-        [novoLivro.ISBN, novoLivro.titulo, categoria.idCategoria, autor.idAutor, novoLivro.editora, novoLivro.edicao. novoLivro.qtdEstoque, novoLivro.resumo]
+        'INSERT INTO livro (isbn, titulo, idCategoria, idAutor, editora, edicao, qtdEstoque, foto resumo) VALUES ($1) RETURNING *',
+        [novoLivro.ISBN, novoLivro.titulo, categoria.idCategoria, autor.idAutor, novoLivro.editora, novoLivro.edicao. novoLivro.qtdEstoque, novoLivro.foto, extensao_arquivo, novoLivro.resumo]
     );  
     
     return "Livro cadastrado com sucesso!";

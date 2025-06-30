@@ -1,5 +1,5 @@
 class Livro {
-    constructor(ISBN, titulo, idCategoria, idAutor, editora, edicao, qtdEstoque, foto, resumo ){
+    constructor(ISBN, titulo, idCategoria, idAutor, editora, edicao, qtdEstoque, foto, resumo){
         this.ISBN = ISBN;   
         this.titulo = titulo;
         this.idCategoria = idCategoria;

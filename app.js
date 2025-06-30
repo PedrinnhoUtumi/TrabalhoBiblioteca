@@ -7,14 +7,14 @@ const autor = require("./entities/autor")
 
 const livroController = require("./controller/livro.controller")
 const livro = require("./entities/livro")
-// const usuarioController = require("./controller/usuario.controller")
+
 const cursoController = require("./controller/curso.controller")
 const curso = require("./entities/curso");
 
 const clienteController = require("./controller/cliente.controller")
 const cliente = require("./entities/cliente")
-// const usuarioDAO = require("./model/usuario.dao")
-// const usuarioRN = require("./model/usuario.rn")
+
+const puxaTabelasDAO = require("./controller/puxaTabelas.controller")
 
 // const axios = require("axios")
 const cors = require("cors")
@@ -28,6 +28,10 @@ const port = 3000
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// app.use(fileupload());
+// app.use('/imagens', express.static('./imagens'));
+
 
 app.use(cors({
     origin: 'http://localhost:5173',
@@ -53,7 +57,7 @@ app.post("/cadastrar", async (req, res) => {
     } catch (error) {
         console.error("Erro ao criar Bibliotecario:", error.message);
         res.status(500).json({ error: "Erro ao criar Bibliotecario" });
-    }novoBibliotecario
+    }
 
 })
 
@@ -106,7 +110,7 @@ app.post("/cadastroUsuario", async (req, res) => {
 
 app.post("/cadastrarLivro", async (req, res) => {
     const { isbn, titulo, idCategoria, idAutor, editora, edicao, qntEstoque, resumo } = req.body;
-    const novoLivro = new livro(isbn, titulo, idCategoria, idAutor, editora, edicao, qntEstoque, resumo)
+    const novoLivro = new livro(isbn, titulo, idCategoria, idAutor, editora, edicao, qntEstoque, files.imagem, resumo)
     try {
         const resposta = await autorController.criarAutor(novoAutor)
         console.log(resposta);
@@ -122,7 +126,7 @@ app.post("/cadastrarLivro", async (req, res) => {
 
 app.get("/api/usuario", async (req, res) => {
     try {
-        const resposta = await clienteController.listarUsuarios()
+        const resposta = await puxaTabelasDAO.puxaTabelas()
         res.status(200).json({message: resposta})
     } catch (error) {
         console.error("Erro ao listar usuario:", error.message);
