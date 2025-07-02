@@ -108,11 +108,12 @@ app.post("/cadastroUsuario", async (req, res) => {
     }
 })
 
-app.post("/cadastrarLivro", async (req, res) => {
-    const { isbn, titulo, idCategoria, idAutor, editora, edicao, qntEstoque, resumo } = req.body;
-    const novoLivro = new livro(isbn, titulo, idCategoria, idAutor, editora, edicao, qntEstoque, files.imagem, resumo)
+app.post("/cadastroLivro", async (req, res) => {
+    const { ISBN, titulo, idCategoria, idAutor, editora, edicao, qtdEstoque, resumo, foto } = req.body;
+    
+    const novoLivro = new livro(ISBN, titulo, idCategoria, idAutor, editora, edicao, qtdEstoque, foto, resumo)
     try {
-        const resposta = await autorController.criarAutor(novoAutor)
+        const resposta = await livroController.criarLivro(novoLivro)
         console.log(resposta);
         
         res.status(201).json({ message: resposta });

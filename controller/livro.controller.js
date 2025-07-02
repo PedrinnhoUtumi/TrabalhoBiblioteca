@@ -2,6 +2,7 @@ const livroDAO = require("../model/dao/livro.dao")
 
 exports.criarLivro = async function(novoLivro){
     try {
+
         return await livroDAO.criarLivro(novoLivro)
 
     }

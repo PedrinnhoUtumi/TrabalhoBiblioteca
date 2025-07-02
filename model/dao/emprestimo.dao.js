@@ -8,3 +8,4 @@ exports.criarEmprestimo = async function(emprestimo, livro, cliente){
     
     return "SubCategoria cadastrada com sucesso!";
 }
+
