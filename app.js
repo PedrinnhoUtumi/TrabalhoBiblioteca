@@ -18,20 +18,20 @@ const puxaTabelasDAO = require("./controller/puxaTabelas.controller")
 
 // const axios = require("axios")
 const cors = require("cors")
-
 const express = require('express')
+const fileupload = require('express-fileupload');
 const app = express()
 const bodyParser = require("body-parser");
 const port = 3000
 
 // const db = require('./config/database')
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
-// app.use(fileupload());
-// app.use('/imagens', express.static('./imagens'));
-
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
+app.use('/bootstrap', express.static('./node_modules/bootstrap/dist'));
+app.use(fileupload());
+app.use('/imagens', express.static('./imagens'));
 
 app.use(cors({
     origin: 'http://localhost:5173',
@@ -109,9 +109,12 @@ app.post("/cadastroUsuario", async (req, res) => {
 })
 
 app.post("/cadastroLivro", async (req, res) => {
-    const { ISBN, titulo, idCategoria, idAutor, editora, edicao, qtdEstoque, resumo, foto } = req.body;
-    
-    const novoLivro = new livro(ISBN, titulo, idCategoria, idAutor, editora, edicao, qtdEstoque, foto, resumo)
+    const { ISBN, titulo, idCategoria, idAutor, editora, edicao, qtdEstoque, resumo} = req.body;
+    const foto = req.files.foto;
+    const caminho = `./imagens/${Date.now()}_${foto.name}`;
+    await foto.mv(caminho);
+
+    const novoLivro = new livro(ISBN, titulo, idCategoria, idAutor, editora, edicao, qtdEstoque, caminho, resumo)
     try {
         const resposta = await livroController.criarLivro(novoLivro)
         console.log(resposta);
