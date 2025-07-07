@@ -15,7 +15,7 @@ exports.listarCategoria = async function(){
 };
 
 
-exports.consultarCategoria= async function(nomeCategoria) {
+exports.consultarCategoria = async function(nomeCategoria) {
 
     const {rows} = await db.query (
         `SELECT * FROM categoria WHERE nomeCategoria = ${nomecategoria}`

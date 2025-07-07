@@ -141,7 +141,17 @@ app.get("/api/usuario", async (req, res) => {
 
 app.put("/api/usuario", async (req, res) => {
     const { dados } = req.body
-    const novoCliente = new cliente(dados.nomeCliente, dados.RA, dados.idProfissao, dados.telefone, dados.dataNasc, dados.email, dados.codigoCurso)
+    console.log(dados)
+    const { idCliente } = req.query
+    for(let i = 0; i < dados.length; i++) {
+        if (dados[i].idCliente === idCliente) {
+            return dados = dados[i]
+        } else {
+            return "erro"
+        }
+
+    }
+    const novoCliente = new cliente(dados.nomecliente, dados.ra, dados.idprofissao, dados.telefone, dados.datanasc, dados.email, dados.codigocurso)
     try {
         const resposta = await clienteController.atualizarUsuario(novoCliente)
         res.status(200).json({message: resposta})
