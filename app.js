@@ -127,6 +127,16 @@ app.post("/cadastroLivro", async (req, res) => {
     }
 })
 
+app.put("/api/livro/:isbn", async (req, res) => {
+    const { isbn } = req.params
+    try {
+        const resposta = await livroController.atualizarLivro(isbn)
+        res.status(200).json({message: resposta})
+    } catch (error) {
+        console.error("Erro ao listar livro:", error.message);
+        res.status(500).json({ error: "Erro ao listar livro" });
+    }
+})
 
 app.get("/api/usuario", async (req, res) => {
     try {
@@ -143,17 +153,29 @@ app.put("/api/usuario", async (req, res) => {
     const { dados } = req.body
     console.log(dados)
     const { idCliente } = req.query
-    for(let i = 0; i < dados.length; i++) {
-        if (dados[i].idCliente === idCliente) {
-            return dados = dados[i]
-        } else {
-            return "erro"
-        }
-
-    }
+    
     const novoCliente = new cliente(dados.nomecliente, dados.ra, dados.idprofissao, dados.telefone, dados.datanasc, dados.email, dados.codigocurso)
+    
+
     try {
-        const resposta = await clienteController.atualizarUsuario(novoCliente)
+        const resposta = await clienteController.atualizarUsuario(novoCliente, idCliente)
+        res.status(200).json({message: resposta})
+    } catch (error) {
+        console.error("Erro ao atualizar usuario:", error.message);
+        res.status(500).json({ error: "Erro ao atualizar usuario" });
+    }
+})
+
+app.put("/api/usuario/livro", async (req, res) => {
+    const { dados } = req.body
+    console.log(dados)
+    const { isbn } = req.query
+    
+    const novoLivro = new livro()
+    
+
+    try {
+        const resposta = await clienteController.atualizarUsuario(novoLivro, isbn)
         res.status(200).json({message: resposta})
     } catch (error) {
         console.error("Erro ao atualizar usuario:", error.message);
@@ -175,5 +197,3 @@ app.delete("/api/usuario/:id", async (req, res) => {
 app.listen(port, () => {
     console.log("Servidor rodando na porta", port);
 })
-
-"https://prod.liveshare.vsengsaas.visualstudio.com/join?56B2D6B63F93A4153D5CD2272BC158A5F822"

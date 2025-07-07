@@ -38,23 +38,11 @@ exports.consultarLivro = async function(isbn, nomeLivro, nomeAutor) {
     }
 }
 
-exports.removerLivro = async function(isbn, nomeLivro) {
-    if(idAutor !== null) {
-        const resposta= await db.query (
-            `DELETE FROM autor WHERE isbn = ${isbn}`
-        );
-        return true
-    } else {
-        const resposta = await db.query (
-            `DELETE FROM autor WHERE nomeLivro = ${nomeLivro}`
-        );
-        return true
-    }
-};
-
-exports.atualizarLivro = async function(nomeLivro) {
+exports.indisponivel = async function(isbn) {
     const resposta = await db.query (
-        `UPDATE autor SET nomeLivro = ${nomeLivro}`
-    )
+        `UPDATE livro
+         SET indisponivel = true
+         WHERE isbn = '${isbn}'`
+    );
     return true
 };

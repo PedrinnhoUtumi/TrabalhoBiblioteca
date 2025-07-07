@@ -30,9 +30,10 @@ exports.removerUsuario = async (idUsuario) => {
     }
 }
 
-exports.atualizarUsuario = async (novoCliente) => {
+exports.atualizarUsuario = async (novoCliente, idCliente) => {
     try {
-        return await clienteDAO.atualizarUsuario(novoCliente)
+
+        return await clienteDAO.atualizarUsuario(novoCliente, idCliente)
     } catch (error) {
         console.error("Erro atualizar", error)
         return "Erro ao atualizar"

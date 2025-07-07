@@ -43,13 +43,13 @@ exports.removerUsuario = async function(idUsuario) {
 
 };
 
-exports.atualizarUsuario = async function(novoCliente) {
+exports.atualizarUsuario = async function(novoCliente, idCliente) {
+    console.log("novo CLiente", novoCliente.nomeCliente);
+
     const resposta = await db.query (
         `UPDATE cliente SET nomecliente = $1, ra = $2, idprofissao = $3, telefone = $4, datanasc = $5, email = $6, codigocurso = $7 WHERE idcliente = $8`,
-        [
-            novoCliente.nomeCliente, novoCliente.RA, novoCliente.idProfissao, novoCliente.telefone, novoCliente.dataNasc, novoCliente.email, novoCliente.codigoCurso, novoCliente.idCliente
-        ]
+        [ novoCliente.nomeCliente, novoCliente.RA, novoCliente.idProfissao, novoCliente.telefone, novoCliente.dataNasc, novoCliente.email, novoCliente.codigoCurso, idCliente ]
         
     )
-    return true
+    return "Cliente alterado com sucesso"
 };
