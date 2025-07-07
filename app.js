@@ -16,7 +16,7 @@ const cliente = require("./entities/cliente")
 
 const puxaTabelasDAO = require("./controller/puxaTabelas.controller")
 
-// const axios = require("axios")
+const axios = require("axios")
 const cors = require("cors")
 const express = require('express')
 const fileupload = require('express-fileupload');
@@ -166,20 +166,20 @@ app.put("/api/usuario", async (req, res) => {
     }
 })
 
-app.put("/api/usuario/livro", async (req, res) => {
+app.put("/api/livro", async (req, res) => {
     const { dados } = req.body
     console.log(dados)
     const { isbn } = req.query
     
-    const novoLivro = new livro()
+    const novoLivro = new livro(dados.ISBN, dados.titulo, dados.idCategoria, dados.idAutor, dados.editora, dados.edicao, dados.qtdEstoque, dados.imagemCapa, dados.resumo)
     
 
     try {
-        const resposta = await clienteController.atualizarUsuario(novoLivro, isbn)
+        const resposta = await livroController.atualizarLivros(novoLivro, isbn)
         res.status(200).json({message: resposta})
     } catch (error) {
-        console.error("Erro ao atualizar usuario:", error.message);
-        res.status(500).json({ error: "Erro ao atualizar usuario" });
+        console.error("Erro ao atualizar livro:", error.message);
+        res.status(500).json({ error: "Erro ao atualizar livro" });
     }
 })
 

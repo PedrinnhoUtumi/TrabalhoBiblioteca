@@ -7,6 +7,6 @@ exports.puxaTabelas = async function(){
     }
     catch (erro) {
         console.error("Erro ao puxar tabelas", erro)
-        return "Erro ao puxar tabelas"
+        throw erro
     }
 }

@@ -1,5 +1,5 @@
 class Livro {
-    constructor(ISBN, titulo, idCategoria, idAutor, editora, edicao, qtdEstoque, foto, resumo){
+    constructor(ISBN, titulo, idCategoria, idAutor, editora, edicao, qtdEstoque, foto, resumo, indisponivel = "false" ){
         this.ISBN = ISBN;   
         this.titulo = titulo;
         this.idCategoria = idCategoria;
@@ -9,6 +9,7 @@ class Livro {
         this.qtdEstoque = qtdEstoque
         this.foto = foto;
         this.resumo = resumo;
+        this.indisponivel = indisponivel
     }
 }
 

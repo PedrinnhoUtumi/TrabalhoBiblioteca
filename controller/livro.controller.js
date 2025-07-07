@@ -12,6 +12,16 @@ exports.criarLivro = async function(novoLivro){
     }
 }
 
+exports.atualizarLivros = async (ISBN) => {
+    try {
+
+        return await livroDAO.atualizarLivros(ISBN)
+    } catch (error) {
+        console.error("Erro atualizar", error)
+        return "Erro ao atualizar"
+    }
+}
+
 exports.atualizarLivro = async (isbn) => {
     try {
         return await livroDAO.indisponivel(isbn)
