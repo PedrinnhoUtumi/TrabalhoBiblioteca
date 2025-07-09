@@ -19,7 +19,7 @@ exports.criarEmprestimo = async function(emprestimo){
 
 exports.atualizarEmprestimo = async function(novoEmprestimo, idEmprestimo) {
     const resposta = await db.query(
-        'UPDATE SET status = false WHERE idEmprestimo = $1',
+        'UPDATE emprestimo SET status = false WHERE idEmprestimo = $1',
         [novoEmprestimo.status, idEmprestimo]
     )
 
@@ -35,3 +35,12 @@ exports.atualizarEmprestimo = async function(novoEmprestimo, idEmprestimo) {
         [ISBN]
     )
 }
+
+exports.indisponivel = async function(idemprestimo) {
+    const resposta = await db.query (
+        `UPDATE emprestimo
+         SET status = false
+         WHERE idCliete = '${idemprestimo}'`
+    );
+    return true
+};

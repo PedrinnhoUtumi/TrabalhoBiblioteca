@@ -9,3 +9,12 @@ exports.criarEmprestimo = async function(novoEmprestimo){
         return "Não foi possível criar o novoEmprestimo!"
     }
 }
+
+exports.removerEmprestimo = async (idemprestimo) => {
+    try {
+        return await emprestimoDAO.indisponivel(idemprestimo)
+    } catch (error) {
+        console.error("Erro atualizar", error)
+        return "Erro ao atualizar"
+    }
+}

@@ -127,6 +127,8 @@ app.post("/api/emprestimo", async (req, res) => {
 app.post("/cadastroLivro", async (req, res) => {
     const { ISBN, titulo, idCategoria, idAutor, editora, edicao, qtdEstoque, resumo} = req.body;
     const foto = req.files.foto;
+    console.log(foto);
+    
     const caminho = `./imagens/${Date.now()}_${foto.name}`;
     await foto.mv(caminho);
 
@@ -147,6 +149,17 @@ app.put("/api/livro/:isbn", async (req, res) => {
     const { isbn } = req.params
     try {
         const resposta = await livroController.atualizarLivro(isbn)
+        res.status(200).json({message: resposta})
+    } catch (error) {
+        console.error("Erro ao listar livro:", error.message);
+        res.status(500).json({ error: "Erro ao listar livro" });
+    }
+})
+
+app.put("/api/emprestimo/:idemprestimo", async (req, res) => {
+    const { idemprestimo } = req.params
+    try {
+        const resposta = await emprestimoController.removerEmprestimo(idemprestimo)
         res.status(200).json({message: resposta})
     } catch (error) {
         console.error("Erro ao listar livro:", error.message);
