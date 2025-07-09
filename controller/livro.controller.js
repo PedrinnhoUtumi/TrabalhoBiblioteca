@@ -12,10 +12,10 @@ exports.criarLivro = async function(novoLivro){
     }
 }
 
-exports.atualizarLivros = async (ISBN) => {
+exports.atualizarLivros = async (novoLivro, ISBN) => {
     try {
 
-        return await livroDAO.atualizarLivros(ISBN)
+        return await livroDAO.atualizarLivros(novoLivro, ISBN)
     } catch (error) {
         console.error("Erro atualizar", error)
         return "Erro ao atualizar"

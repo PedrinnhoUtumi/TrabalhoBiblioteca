@@ -166,14 +166,15 @@ app.put("/api/usuario", async (req, res) => {
     }
 })
 
-app.put("/api/livro", async (req, res) => {
-    const { dados } = req.body
-    console.log(dados)
+app.put("/api/usuario/livro", async (req, res) => {
+    const { titulo, idcategoria, idautor, editora, edicao, qtdestoque, resumo} = req.body;
     const { isbn } = req.query
-    
-    const novoLivro = new livro(dados.ISBN, dados.titulo, dados.idCategoria, dados.idAutor, dados.editora, dados.edicao, dados.qtdEstoque, dados.imagemCapa, dados.resumo)
-    
+    const foto = req.files.imagemcapa;
+    const caminho = `./imagens/${Date.now()}_${foto.name}`;
 
+    await foto.mv(caminho);
+    const novoLivro = new livro(isbn, titulo, idcategoria, idautor, editora, edicao, qtdestoque, caminho, resumo, false)
+    
     try {
         const resposta = await livroController.atualizarLivros(novoLivro, isbn)
         res.status(200).json({message: resposta})
