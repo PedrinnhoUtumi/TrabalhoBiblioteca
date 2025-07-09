@@ -31,12 +31,19 @@ exports.atualizarLivro = async (isbn) => {
     }
 }
 
-
-
-
-exports.removerLivro = async (isbn) => {
+exports.atualizarLivro = async (isbn) => {
     try {
-        return await livroDAO.removerLivro(isbn)
+        return await livroDAO.indisponivel(isbn)
+    } catch (error) {
+        console.error("Erro atualizar", error)
+        return "Erro ao atualizar"
+    }
+}
+
+
+exports.emprestarLivro = async (isbn) => {
+    try {
+        return await livroDAO.emprestarLivros(isbn)
     } catch (error) {
         console.error("Erro ao listar livro", error)
         return "Erro ao listar livro"

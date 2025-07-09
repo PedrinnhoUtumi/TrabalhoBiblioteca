@@ -14,6 +14,9 @@ const curso = require("./entities/curso");
 const clienteController = require("./controller/cliente.controller")
 const cliente = require("./entities/cliente")
 
+const emprestimoController = require("./controller/emprestimo.controller")
+const emprestimo = require("./entities/emprestimo")
+
 const puxaTabelasDAO = require("./controller/puxaTabelas.controller")
 
 const axios = require("axios")
@@ -24,11 +27,6 @@ const app = express()
 const bodyParser = require("body-parser");
 const port = 3000
 
-// const db = require('./config/database')
-
-
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
 app.use('/bootstrap', express.static('./node_modules/bootstrap/dist'));
 app.use(fileupload());
 app.use('/imagens', express.static('./imagens'));
@@ -107,6 +105,24 @@ app.post("/cadastroUsuario", async (req, res) => {
         res.status(500).json({ error: "Erro ao criar Cliente" });
     }
 })
+
+app.post("/api/emprestimo", async (req, res) => {
+    const {ISBN, status, idCliente, dataEmprestimo} = req.body
+    console.log(ISBN, status, idCliente, dataEmprestimo)
+    const novoEmprestimo = new emprestimo(ISBN, status, idCliente, dataEmprestimo) 
+    try {
+        const resposta = await emprestimoController.criarEmprestimo(novoEmprestimo)
+        console.log(resposta);
+        
+        res.status(201).json({ message: resposta });
+
+    } catch (error) {
+        console.error("Erro ao criar Cliente:", error.message);
+        res.status(500).json({ error: "Erro ao criar Cliente" });
+    }
+})
+
+
 
 app.post("/cadastroLivro", async (req, res) => {
     const { ISBN, titulo, idCategoria, idAutor, editora, edicao, qtdEstoque, resumo} = req.body;

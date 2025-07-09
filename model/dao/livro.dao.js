@@ -58,6 +58,14 @@ exports.atualizarLivros = async function(novoLivro, ISBN) {
         [ novoLivro.ISBN, novoLivro.titulo, novoLivro.idCategoria, novoLivro.idAutor, novoLivro.editora, novoLivro.edicao, novoLivro.qtdEstoque, novoLivro.imagemCapa, novoLivro.resumo, ISBN]
         
     )
+    if(novoLivro.qtdEstoque === 0) {
+        const resposta2 = await db.query (
+            `UPDATE livro SET indisponivel = true WHERE ISBN = $1`,
+            [novoLivro.ISBN]
+        )
+    }
+    console.log("qtdEstoque alterada para", novoLivro.qtdEstoque)
     console.log("Rows affected:", resposta.rowCount);
     return "Cliente alterado com sucesso"
 };
+
