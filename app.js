@@ -159,7 +159,7 @@ app.put("/api/livro/:isbn", async (req, res) => {
 app.put("/api/emprestimo/:idemprestimo", async (req, res) => {
     const { idemprestimo } = req.params
     try {
-        const resposta = await emprestimoController.removerEmprestimo(idemprestimo)
+        const resposta = await emprestimoController.indisponivel(idemprestimo)
         res.status(200).json({message: resposta})
     } catch (error) {
         console.error("Erro ao listar livro:", error.message);

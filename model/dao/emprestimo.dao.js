@@ -40,7 +40,7 @@ exports.indisponivel = async function(idemprestimo) {
     const resposta = await db.query (
         `UPDATE emprestimo
          SET status = false
-         WHERE idCliete = '${idemprestimo}'`
+         WHERE idCliente = '${idemprestimo}'`
     );
     return true
 };

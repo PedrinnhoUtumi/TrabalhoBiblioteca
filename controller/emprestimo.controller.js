@@ -10,7 +10,7 @@ exports.criarEmprestimo = async function(novoEmprestimo){
     }
 }
 
-exports.removerEmprestimo = async (idemprestimo) => {
+exports.indisponivel = async (idemprestimo) => {
     try {
         return await emprestimoDAO.indisponivel(idemprestimo)
     } catch (error) {
