@@ -11,6 +11,11 @@ exports.criarEmprestimo = async function(emprestimo){
         [emprestimo.isbnLivro]
     )
 
+    const respostaCliente = await db.query (
+        `UPDATE cliente SET qtdemprestimo = qtdemprestimo + 1 WHERE idCliente = $1`,
+        [emprestimo.idCliente]
+    )
+
     console.log("Rows affected:", resposta);
     return "Cliente alterado com sucesso"
     

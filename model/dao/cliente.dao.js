@@ -3,8 +3,8 @@ const md5 = require("md5")
 
 exports.criarUsuario = async function(novoCliente){
     const resposta = await db.query(
-        'INSERT INTO Cliente (nomeCliente, RA, idProfissao, telefone, dataNasc, email, codigoCurso) VALUES ($1, $2, $3, $4, $5, $6, $7)',
-        [novoCliente.nomeCliente, novoCliente.RA, novoCliente.idProfissao, novoCliente.telefone, novoCliente.dataNasc, novoCliente.email, novoCliente.codigoCurso]
+        'INSERT INTO Cliente (nomeCliente, RA, idProfissao, telefone, dataNasc, email, codigoCurso, qtdEmprestimo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
+        [novoCliente.nomeCliente, novoCliente.RA, novoCliente.idProfissao, novoCliente.telefone, novoCliente.dataNasc, novoCliente.email, novoCliente.codigoCurso, 0]
     );
     
     return "Cliente cadastrado com sucesso!";
