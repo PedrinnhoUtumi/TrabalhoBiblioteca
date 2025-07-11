@@ -40,8 +40,11 @@ exports.removerUsuario = async function(idUsuario) {
         `DELETE FROM Cliente WHERE idcliente = ${idUsuario}`
     );
     return true
+    
 
 };
+
+
 
 exports.atualizarUsuario = async function(novoCliente, idCliente) {
     console.log("novo CLiente", novoCliente.nomeCliente);

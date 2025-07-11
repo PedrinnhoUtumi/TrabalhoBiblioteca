@@ -6,18 +6,45 @@ exports.criarEmprestimo = async function(emprestimo){
         'INSERT INTO emprestimo (isbnlivro, status, idcliente, dataemprestimo) VALUES ($1, $2, $3, $4) RETURNING *',
         [emprestimo.isbnLivro, emprestimo.status, emprestimo.idCliente, emprestimo.dataEmprestimo]
     );
-    
+
+    const livroResultado = await db.query(
+        'SELECT qtdEstoque FROM livro WHERE ISBN = $1',
+        [emprestimo.isbnLivro]
+    );
+
+        if (livroResultado.rows.length === 0) {
+            console.log("Livro não encontrado.");
+            return;
+        }
+
+    const qtdemprestimo = livroResultado.rows[0].qtdestoque
+
+    if (qtdemprestimo < 1) { 
+        console.log("Indisponível para emprestimo")
+        return
+    } 
     const resposta = await db.query (
         `UPDATE livro SET qtdEstoque = qtdEstoque - 1 WHERE ISBN = $1`,
         [emprestimo.isbnLivro]
     )
+
+
 
     const respostaCliente = await db.query (
         `UPDATE cliente SET qtdemprestimo = qtdemprestimo + 1 WHERE idCliente = $1`,
         [emprestimo.idCliente]
     )
     const statusDoEmprestimo = emprestimo.status ? "Livro emprestado" : "Livro devolvido"
-    enviarEmail(emprestimo.email, statusDoEmprestimo, "Empreste sempre conosco!")
+    const mensagem = `
+        Data do emprestimo: ${emprestimo.dataEmprestimo}
+        ISBN do livro: ${emprestimo.isbnLivro}
+        ID do cliente: ${emprestimo.idCliente}
+
+        Esperamos devolução em até 5 dias! Sujeito a multa de R$1,00 por dia em caso de atraso
+
+        Empreste sempre conosco!
+    `
+    enviarEmail(emprestimo.email, statusDoEmprestimo, mensagem)
 
     console.log("Rows affected:", resposta);
     return "Cliente alterado com sucesso"

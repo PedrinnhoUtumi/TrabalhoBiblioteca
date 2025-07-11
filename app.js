@@ -107,9 +107,9 @@ app.post("/cadastroUsuario", async (req, res) => {
 })
 
 app.post("/api/emprestimo", async (req, res) => {
-    const {ISBN, status, idCliente, dataEmprestimo, email} = req.body
+    const {ISBN, status, idCliente, dataEmprestimo, email, qtdemprestimo} = req.body
     console.log(ISBN, status, idCliente, dataEmprestimo, email)
-    const novoEmprestimo = new emprestimo(ISBN, status, idCliente, dataEmprestimo, email) 
+    const novoEmprestimo = new emprestimo(ISBN, status, idCliente, dataEmprestimo, email, qtdemprestimo) 
     try {
         const resposta = await emprestimoController.criarEmprestimo(novoEmprestimo)
         console.log(resposta);
