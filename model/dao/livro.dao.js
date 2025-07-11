@@ -51,13 +51,19 @@ exports.indisponivel = async function(isbn) {
 };
 
 exports.atualizarLivros = async function(novoLivro, ISBN) {
-    console.log("novo Livro", novoLivro.ISBN);
-
+    console.log("novo Livro", ISBN);
     const resposta = await db.query (
         `UPDATE livro SET ISBN = $1, titulo = $2, idCategoria = $3, idAutor = $4, editora = $5, edicao = $6, qtdEstoque = $7, imagemCapa = $8, resumo = $9 WHERE ISBN = $10`,
         [ novoLivro.ISBN, novoLivro.titulo, novoLivro.idCategoria, novoLivro.idAutor, novoLivro.editora, novoLivro.edicao, novoLivro.qtdEstoque, novoLivro.imagemCapa, novoLivro.resumo, ISBN]
         
     )
+
+    if (novoLivro.ISBN !== ISBN) {
+        await db.query(
+            `UPDATE emprestimo SET isbnLivro = $1 WHERE isbnLivro = $2`,
+            [novoLivro.ISBN, ISBN]
+        );
+    }
     if(novoLivro.qtdEstoque === 0) {
         const resposta2 = await db.query (
             `UPDATE livro SET indisponivel = true WHERE ISBN = $1`,

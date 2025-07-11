@@ -107,9 +107,9 @@ app.post("/cadastroUsuario", async (req, res) => {
 })
 
 app.post("/api/emprestimo", async (req, res) => {
-    const {ISBN, status, idCliente, dataEmprestimo} = req.body
-    console.log(ISBN, status, idCliente, dataEmprestimo)
-    const novoEmprestimo = new emprestimo(ISBN, status, idCliente, dataEmprestimo) 
+    const {ISBN, status, idCliente, dataEmprestimo, email} = req.body
+    console.log(ISBN, status, idCliente, dataEmprestimo, email)
+    const novoEmprestimo = new emprestimo(ISBN, status, idCliente, dataEmprestimo, email) 
     try {
         const resposta = await emprestimoController.criarEmprestimo(novoEmprestimo)
         console.log(resposta);
@@ -158,6 +158,8 @@ app.put("/api/livro/:isbn", async (req, res) => {
 
 app.put("/api/emprestimo/:idemprestimo", async (req, res) => {
     const { idemprestimo } = req.params
+    console.log(idemprestimo);
+    
     try {
         const resposta = await emprestimoController.indisponivel(idemprestimo)
         res.status(200).json({message: resposta})
@@ -196,16 +198,17 @@ app.put("/api/usuario", async (req, res) => {
 })
 
 app.put("/api/usuario/livro", async (req, res) => {
-    const { titulo, idcategoria, idautor, editora, edicao, qtdestoque, resumo} = req.body;
+    const { titulo, idcategoria, idautor, editora, edicao, qtdestoque, resumo, isbnAntigo} = req.body;
     const { isbn } = req.query
     const foto = req.files.imagemcapa;
     const caminho = `./imagens/${Date.now()}_${foto.name}`;
-
+    console.log(isbnAntigo);
+    
     await foto.mv(caminho);
     const novoLivro = new livro(isbn, titulo, idcategoria, idautor, editora, edicao, qtdestoque, caminho, resumo, false)
     
     try {
-        const resposta = await livroController.atualizarLivros(novoLivro, isbn)
+        const resposta = await livroController.atualizarLivros(novoLivro, isbnAntigo)
         res.status(200).json({message: resposta})
     } catch (error) {
         console.error("Erro ao atualizar livro:", error.message);

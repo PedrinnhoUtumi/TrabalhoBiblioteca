@@ -1,4 +1,5 @@
 const db = require("../../config/database")
+const enviarEmail = require("../../config/email")
 
 exports.criarEmprestimo = async function(emprestimo){
     const response = await db.query(
@@ -15,6 +16,8 @@ exports.criarEmprestimo = async function(emprestimo){
         `UPDATE cliente SET qtdemprestimo = qtdemprestimo + 1 WHERE idCliente = $1`,
         [emprestimo.idCliente]
     )
+    const statusDoEmprestimo = emprestimo.status ? "Livro emprestado" : "Livro devolvido"
+    enviarEmail(emprestimo.email, statusDoEmprestimo, "Empreste sempre conosco!")
 
     console.log("Rows affected:", resposta);
     return "Cliente alterado com sucesso"
@@ -45,7 +48,7 @@ exports.indisponivel = async function(idemprestimo) {
     const resposta = await db.query (
         `UPDATE emprestimo
          SET status = false
-         WHERE idCliente = '${idemprestimo}'`
+         WHERE idemprestimo = '${idemprestimo}'`
     );
     return true
 };
