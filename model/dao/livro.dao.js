@@ -3,10 +3,6 @@ const db = require("../../config/database")
 
 exports.criarLivro = async function(novoLivro){
     console.log("QTDEESTOQUE:", novoLivro.qtdEstoque);
-
-    // const extensao_arquivo = novoLivro.foto.nome.split(".").pop();
-    
-    
     const response = await db.query(
         'INSERT INTO livro (isbn, titulo, idCategoria, idAutor, editora, edicao, qtdestoque, imagemcapa, resumo, indisponivel) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
         [novoLivro.ISBN, novoLivro.titulo, novoLivro.idCategoria, novoLivro.idAutor, novoLivro.editora, novoLivro.edicao, novoLivro.qtdEstoque, novoLivro.imagemCapa, novoLivro.resumo, novoLivro.indisponivel]

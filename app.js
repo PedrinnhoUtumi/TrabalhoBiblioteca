@@ -140,8 +140,8 @@ app.post("/cadastroLivro", async (req, res) => {
         res.status(201).json({ message: resposta });
 
     } catch (error) {
-        console.error("Erro ao criar Bibliotecario:", error.message);
-        res.status(500).json({ error: "Erro ao criar Bibliotecario" });
+        console.error("Erro ao criar livro:", error.message);
+        res.status(500).json({ error: "Erro ao criar livro" });
     }
 })
 
